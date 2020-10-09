@@ -9,13 +9,24 @@ export default class Gameboard extends React.Component {
         super(props);
         this.state = {
             options:[],
-            answer:[]
+            answerid:[]
         };
+        this.getOptions = this.getOptions.bind(this);
+        this.getAnswer = this.getAnswer.bind(this);
     }
 
+    getOptions = (arr) => {
+        return (random(arr,6));
+    };
+
+    getAnswer = (arr) => {
+        return (random(arr,1));
+    };
+
     render() {
-        let options = random(this.props.data,6);
-        let answer = random(options,1);
+        let options = this.getOptions(this.props.data);
+        let answer = this.getAnswer(options,1);
+
         return (
             <Container fluid className='w-50'>
             <Row>
