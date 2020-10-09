@@ -36,3 +36,24 @@
     transform: rotate(360deg);
   }
 }
+
+/* Cards */
+.hide-name {
+  display: none;
+}
+
+.show-name {
+  display: block;
+}
+
+.wrong-card {
+  background-color: red;
+}
+
+.right-card {
+  background-color: green;
+}
+
+.checked-img {
+  opacity: .5;
+}

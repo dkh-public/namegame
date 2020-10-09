@@ -13,6 +13,7 @@ export default class Gameboard extends React.Component {
         };
         this.getOptions = this.getOptions.bind(this);
         this.getAnswer = this.getAnswer.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
 
     getOptions = (arr) => {
@@ -20,7 +21,12 @@ export default class Gameboard extends React.Component {
     };
 
     getAnswer = (arr) => {
-        return (random(arr,1));
+        var answer = random(arr,1);
+        return answer
+    };
+
+    handleClick = () => {
+
     };
 
     render() {
@@ -37,7 +43,7 @@ export default class Gameboard extends React.Component {
             </Row>
             <Row className="row row-cols-3">
                 {options.map((option, index) => (
-                    <Card key={option.id} id={option.id} headshotURL={option.headshot.url} data={option} />
+                    <Card key={option.id} id={option.id} headshotURL={option.headshot.url} data={option} answer={answer[0].id} onClick={this.handleClick()} />
                 ))}
             </Row>
             <Row>
