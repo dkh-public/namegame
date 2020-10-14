@@ -13,17 +13,18 @@ export default class Card extends React.Component {
     };
 
     handleClick() {
-        console.log(this.props.data.id + ' = ' + this.props.answer);
         if(this.props.data.id === this.props.answer) {
+            this.props.getGuess('Correct');
             this.setState({
                 cardClass: 'card right-card',
                 imgClass: 'card-img-top checked-img'
-            })
+            });
         } else {
+            this.props.getGuess('Incorrect');
             this.setState({
                 cardClass: 'card wrong-card',
                 imgClass: 'card-img-top checked-img'
-            })
+            });
         };
     };
 

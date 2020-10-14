@@ -9,7 +9,11 @@ export default class Gameboard extends React.Component {
         super(props);
         this.initState = {
             options:[],
-            answer:{}
+            answer:{},
+            guesses: 0,
+            correct: 0,
+            wrong: 0,
+            score: '0%'
         };
         this.state = this.initState;
         this.newBoard = this.newBoard.bind(this);
@@ -33,8 +37,26 @@ export default class Gameboard extends React.Component {
         })
     };
 
-    getGuess = (optionID) => {
-        console.log(optionID);
+    getGuess = (result) => {
+        let guesses = this.state.guesses+1;
+        let correct = this.state.correct;
+        let wrong = this.state.wrong;
+
+        if(result==='Correct') {
+            correct++;
+            let score = ((parseFloat(correct)/parseFloat(guesses))*100).toFixed(0);
+            this.setState({score: score+'%'});
+            let reloadBoard = setTimeout(this.newBoard,3000);
+        } else {
+            wrong++;
+        };
+
+        this.setState({
+            guesses: guesses,
+            correct: correct,
+            wrong: wrong
+        });
+
     };
 
     render() {
@@ -42,6 +64,11 @@ export default class Gameboard extends React.Component {
             <Container fluid className='w-50'>
             <Row>
                 <Col>WillowTree Name Game</Col>
+            </Row>
+            <Row>
+                <Col>
+                    CORRECT: {this.state.correct} | WRONG: {this.state.wrong} | SCORE: {this.state.score}
+                </Col>
             </Row>
             <Row>
                 <Col>Can you identify <span>{this.state.answer.firstName} {this.state.answer.lastName}</span></Col>
