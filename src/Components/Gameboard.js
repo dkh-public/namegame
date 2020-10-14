@@ -7,47 +7,52 @@ import Card from './Card';
 export default class Gameboard extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
+        this.initState = {
             options:[],
-            answerid:[]
+            answer:{}
         };
-        this.getOptions = this.getOptions.bind(this);
-        this.getAnswer = this.getAnswer.bind(this);
-        this.handleClick = this.handleClick.bind(this);
+        this.state = this.initState;
+        this.newBoard = this.newBoard.bind(this);
     }
 
-    getOptions = (arr) => {
-        return (random(arr,6));
+    componentDidMount = () => {
+        let options = random(this.props.data,6);
+        let answer = random(options,1)[0];
+        this.setState({
+            options: options,
+            answer: answer
+        })
     };
 
-    getAnswer = (arr) => {
-        var answer = random(arr,1);
-        return answer
+    newBoard = () => {
+        let options = random(this.props.data,6);
+        let answer = random(options,1)[0];
+        this.setState({
+            options: options,
+            answer: answer
+        })
     };
 
-    handleClick = () => {
-
+    getGuess = (optionID) => {
+        console.log(optionID);
     };
 
     render() {
-        let options = this.getOptions(this.props.data);
-        let answer = this.getAnswer(options,1);
-
         return (
             <Container fluid className='w-50'>
             <Row>
                 <Col>WillowTree Name Game</Col>
             </Row>
             <Row>
-                <Col>Can you identify <Answer data={answer} /></Col>
+                <Col>Can you identify <span>{this.state.answer.firstName} {this.state.answer.lastName}</span></Col>
             </Row>
             <Row className="row row-cols-3">
-                {options.map((option, index) => (
-                    <Card key={option.id} id={option.id} headshotURL={option.headshot.url} data={option} answer={answer[0].id} onClick={this.handleClick()} />
+                {this.state.options.map((option, index) => (
+                    <Card key={option.id} data={option} answer={this.state.answer.id} getGuess={this.getGuess} />
                 ))}
             </Row>
             <Row>
-    
+                <button onClick={() => this.newBoard()}>Play Again</button>
             </Row>
             </Container>
         );
