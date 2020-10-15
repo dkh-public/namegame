@@ -37,6 +37,15 @@
   }
 }
 
+/* Gameboard */
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
 /* Cards */
 .hide-name {
   display: none;
