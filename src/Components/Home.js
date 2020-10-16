@@ -1,7 +1,8 @@
 import React from 'react';
 import {Container,Row,Col,Button} from 'react-bootstrap';
+import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 
-function Intro(props) {
+function Home(props) {
     return (
         <Container fluid className='w-50'>
             <Row>
@@ -11,11 +12,11 @@ function Intro(props) {
             </Row>
             <Row>
                 <Col>
-                    <Button onClick={() => props.startGame(true)}>Click Here to Play!</Button>
+                    <Link to="/play"><Button>Click Here to Play!</Button></Link>
                 </Col>
             </Row>
         </Container>
     )
 }
 
-export default Intro;
+export default Home;

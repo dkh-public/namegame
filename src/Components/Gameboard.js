@@ -1,8 +1,9 @@
 import React from 'react';
 import {Container, Row, Col, Button} from 'react-bootstrap';
+import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 import random from 'random-n';
 import Answer from './Answer';
-import Card from './Card';
+import EmpCard from './EmpCard';
 
 export default class Gameboard extends React.Component {
     constructor(props) {
@@ -59,19 +60,16 @@ export default class Gameboard extends React.Component {
 
     render() {
         return (
-            <Container fluid className='w-50'>
-                <Row>
-                    <Col><h1>WillowTree Name Game</h1></Col>
-                </Row>
+            <Container fluid>
                 <Row>
                     <Col>
-                    <h3>Can you identify <b>{this.state.answer.firstName} {this.state.answer.lastName}</b>?</h3>
+                        <h3>Can you identify <b>{this.state.answer.firstName} {this.state.answer.lastName}</b>?</h3>
                     </Col>
                 </Row>
                 {this.state.rounds < 6 ? 
                 <Row className="row row-cols-3">
                     {this.state.options.map((option, index) => (
-                        <Card key={option.id} data={option} answer={this.state.answer.id} getGuess={this.getGuess} />
+                        <EmpCard key={option.id} data={option} answer={this.state.answer.id} getGuess={this.getGuess} />
                     ))}
                 </Row> : 
                 <Row>
@@ -81,13 +79,8 @@ export default class Gameboard extends React.Component {
                 </Row>
                 }
                 <Row>
-                    <Col>
-                    <h3>So far, you've got {this.state.correct} out of {this.state.guesses} guess{this.state.guesses != 1 ? 'es' : ''} correct!</h3>
-                    </Col>
-                </Row>
-                <Row>
                     {/* <Button onClick={() => this.newBoard()}>Play Again</Button> */}
-                    <Button onClick={() => this.props.startGame(false)}>Quit</Button>
+                    <Link to="/"><Button>Leave the Game</Button></Link>
                 </Row>
             </Container>
         );
