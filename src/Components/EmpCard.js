@@ -7,7 +7,7 @@ export default class EmpCard extends React.Component {
         this.state={
             clicked: false,
             cardClass: 'card border-1',
-            answerClass: 'hide-name',
+            answerClass: 'show-name',
             imgClass: 'card-img-top'
         }
     };

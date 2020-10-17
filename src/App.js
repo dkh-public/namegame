@@ -14,6 +14,7 @@ export default class App extends React.Component {
       error: null,
       data:[]
     };
+    this.filterData = this.filterData.bind(this);
   }
 
   componentDidMount() {
@@ -35,6 +36,11 @@ export default class App extends React.Component {
       )
   }
 
+  filterData = (data) => {
+    let fData = data.filter(item => item.headshot.width >= 200);
+    return fData;
+  }
+
   render() {
     const {error, dataLoaded, data} = this.state;
     if(error) {
@@ -50,7 +56,7 @@ export default class App extends React.Component {
                 <Home />
               </Route>
               <Route exact path="/play">
-                <Gameboard data={data} />
+                <Gameboard data={this.filterData(this.state.data)} />
               </Route>
             </Switch>
           </Router>
