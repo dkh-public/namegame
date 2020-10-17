@@ -18,7 +18,9 @@ export default class Gameboard extends React.Component {
             rounds: 1,
             thisRound: '',
             // Display state
-            cardClass: 'card'
+            cardClass: 'card m-3',
+            // Button state
+            nextRound: 'disabled'
         };
         this.state = this.initState;
         this.newBoard = this.newBoard.bind(this);
@@ -40,21 +42,34 @@ export default class Gameboard extends React.Component {
             options: options,
             answer: answer,
             rounds: this.state.rounds+1,
-            thisRound: ''
+            thisRound: '',
+            nextRound: 'disabled',
+            cardClass: this.initState.cardClass
         });
     };
 
     getResult = (result) => {
+        this.setState({
+            cardClass: 'card m-3 checked-card',
+            nextRound: ''
+        })
         if(result===this.state.answer.id) {
-            this.setState({thisRound: 'Correct!'})
+            this.setState({
+                thisRound: 'Correct!',
+                correct: this.state.correct+1,
+            })
         } else {
-            this.setState({thisRound: 'Incorrect!'})
+            this.setState({
+                thisRound: 'Incorrect!',
+                wrong: this.state.wrong+1
+            })
         };
     }
 
     render() {
         return (
             <Container fluid className="gameboard">
+                {/* Render header bar w/ logo and "back" icon */}
                 <Row className="header">
                     <Col className="text-left" lg={2}>
                         <img src="./name_game_back_icon.png" />
@@ -71,14 +86,16 @@ export default class Gameboard extends React.Component {
                             </Col>
                         </Row>
                         <Row>
-                            <Col className="text-center mb-3">
+                            <Col className="text-center mb-3 lead">
+                                {/* Render answer name*/}
                                 <b>{this.state.answer.firstName} {this.state.answer.lastName}</b>
                             </Col>
                         </Row>
-                        {this.state.rounds <= 6 ? 
+                        {this.state.correct < 5 ? 
                         <Row className="row row-cols-4">
+                            {/* Lay out the card deck */}
                             {this.state.options.map((option, index) => (
-                                <EmpCard key={option.id} data={option} answer={this.state.answer.id} getResult={this.getResult} className={this.state.cardClass} />
+                                <EmpCard key={option.id} data={option} answer={this.state.answer.id} getResult={this.getResult} cardClass={this.state.cardClass} />
                             ))}
                         </Row> : 
                         <Row>
@@ -87,10 +104,14 @@ export default class Gameboard extends React.Component {
                             </Col>
                         </Row>
                         }
-                        <Row>
+                        <Row className="mb-5">
                             <Col className="text-center">
                                 {/* <Button onClick={() => this.newBoard()}>Play Again</Button> */}
-                                <Button className="btn-lg btn-info w-25 rounded-5 mr-1" onClick={()  => this.newBoard()}>{this.state.rounds < 6 ? 'Next Round!' : 'Let\'s see that score!'}</Button> 
+                                {this.state.rounds < 6 ? 
+                                    <Button disabled={this.state.nextRound} className="btn-lg btn-info w-25 rounded-5 mr-1" onClick={()  => this.newBoard()}>Continue</Button>
+                                :
+                                    <Link to="/stats"><Button className="btn-lg btn-info w-25 rounded-5 mr-1" onClick={()  => this.newBoard()}>Great! Let's see that score!</Button></Link>
+                                }
                                 <Link to="/"><Button className="btn-lg btn-info w-25 rounded-5 ml-1">Leave the Game</Button></Link>
                             </Col>
                         </Row>

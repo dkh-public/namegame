@@ -38,6 +38,7 @@
 }
 
 /* Cards */
+
 .hide-name {
   display: none;
 }
@@ -54,6 +55,6 @@
   border: 1px solid green;
 }
 
-.checked-img {
+.checked-card {
   opacity: .5;
 }

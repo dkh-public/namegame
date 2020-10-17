@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 import {Container, Row, Col, Button, Navbar} from 'react-bootstrap';
 import Home from './Components/Home';
 import Gameboard from './Components/Gameboard';
+import Stats from './Components/Stats';
 import './App.css';
 
 export default class App extends React.Component {
@@ -57,6 +58,9 @@ export default class App extends React.Component {
               </Route>
               <Route exact path="/play">
                 <Gameboard data={this.filterData(this.state.data)} />
+              </Route>
+              <Route exact path="/stats">
+                <Stats />
               </Route>
             </Switch>
           </Router>
