@@ -56,11 +56,11 @@
 }
 
 .wrong-card {
-  background-color: red;
+  border: 1px solid red;
 }
 
 .right-card {
-  background-color: green;
+  border: 1px solid green;
 }
 
 .checked-img {

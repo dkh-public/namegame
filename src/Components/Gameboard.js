@@ -9,12 +9,16 @@ export default class Gameboard extends React.Component {
     constructor(props) {
         super(props);
         this.initState = {
+            // Gameboard state
             options:[],
             answer:{},
             guesses: 0,
             correct: 0,
             wrong: 0,
-            rounds: 0
+            rounds: 1,
+            thisRound: '',
+            // Display state
+            cardClass: 'card'
         };
         this.state = this.initState;
         this.newBoard = this.newBoard.bind(this);
@@ -34,42 +38,33 @@ export default class Gameboard extends React.Component {
         let answer = random(options,1)[0];
         this.setState({
             options: options,
-            answer: answer
-        })
+            answer: answer,
+            rounds: this.state.rounds+1,
+            thisRound: ''
+        });
     };
 
-    getGuess = (result) => {
-        let {guesses,correct,wrong} = this.state;
-        if(result==='Correct') {
-            this.setState({
-                guesses: this.state.guesses+1,
-                correct: this.state.correct+1,
-            })
+    getResult = (result) => {
+        if(result===this.state.answer.id) {
+            this.setState({thisRound: 'Correct!'})
         } else {
-            this.setState({
-                guesses: this.state.guesses+1
-            })
+            this.setState({thisRound: 'Incorrect!'})
         };
-        this.setState({
-            rounds: this.state.rounds+1
-        });
-        setTimeout(
-            () => this.newBoard(),3000
-        )
-    };
+    }
 
     render() {
         return (
             <Container fluid>
                 <Row>
                     <Col>
-                        <h3>Can you identify <b>{this.state.answer.firstName} {this.state.answer.lastName}</b>?</h3>
+                        <h3>Can you identify <b>{this.state.answer.firstName} {this.state.answer.lastName}</b>? <i>Round {this.state.rounds} {this.state.thisRound.length ? this.state.thisRound : ''}</i></h3>
+                        <Button onClick={()  => this.newBoard()}>{this.state.rounds < 6 ? 'Next Round!' : 'Let\'s see that score!'}</Button>
                     </Col>
                 </Row>
-                {this.state.rounds < 6 ? 
+                {this.state.rounds <= 6 ? 
                 <Row className="row row-cols-3">
                     {this.state.options.map((option, index) => (
-                        <EmpCard key={option.id} data={option} answer={this.state.answer.id} getGuess={this.getGuess} />
+                        <EmpCard key={option.id} data={option} answer={this.state.answer.id} getResult={this.getResult} className={this.state.cardClass} />
                     ))}
                 </Row> : 
                 <Row>

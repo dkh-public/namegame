@@ -1,5 +1,5 @@
 import React from 'react';
-import Card from 'react-bootstrap/Card';
+import {Card, Button} from 'react-bootstrap';
 
 export default class EmpCard extends React.Component {
     constructor(props) {
@@ -7,26 +7,9 @@ export default class EmpCard extends React.Component {
         this.state={
             clicked: false,
             cardClass: 'card border-1',
+            answerClass: 'hide-name',
             imgClass: 'card-img-top'
         }
-
-        this.handleClick = this.handleClick.bind(this);
-    };
-
-    handleClick() {
-        if(this.props.data.id === this.props.answer) {
-            this.props.getGuess('Correct');
-            this.setState({
-                cardClass: 'card right-card',
-                imgClass: 'card-img-top checked-img'
-            });
-        } else {
-            this.props.getGuess('Incorrect');
-            this.setState({
-                cardClass: 'card wrong-card',
-                imgClass: 'card-img-top checked-img'
-            });
-        };
     };
 
     render() {
@@ -35,11 +18,11 @@ export default class EmpCard extends React.Component {
             //     <img alt='' src={this.props.data.headshot.url} width="100" />
             //     <span className='hide-name'>{this.props.data.firstName} {this.props.data.lastName}</span>
             // </div>
-            <Card onClick={this.handleClick}>
-            <Card.Img className={this.state.imgClass} variant="top" src={this.props.data.headshot.url} />
-            <Card.Body className="hide-name">
-                <Card.Title>{this.props.data.firstName} {this.props.data.lastName}</Card.Title>
-            </Card.Body>
+            <Card onClick={() => this.props.getResult(this.props.data.id)}>
+                <Card.Img className={this.state.imgClass} variant="top" src={this.props.data.headshot.url} />
+                <Card.Body className={this.state.answerClass}>
+                    <Card.Title>{this.props.data.firstName} {this.props.data.lastName}</Card.Title>
+                </Card.Body>
             </Card>
         )
     };
