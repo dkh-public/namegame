@@ -1,5 +1,5 @@
 import React from 'react';
-import {Container, Row, Col, Button} from 'react-bootstrap';
+import {Container, Navbar, Row, Col, Button} from 'react-bootstrap';
 import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 import random from 'random-n';
 import Answer from './Answer';
@@ -54,28 +54,47 @@ export default class Gameboard extends React.Component {
 
     render() {
         return (
-            <Container fluid>
-                <Row>
-                    <Col>
-                        <h3>Can you identify <b>{this.state.answer.firstName} {this.state.answer.lastName}</b>? <i>Round {this.state.rounds} {this.state.thisRound.length ? this.state.thisRound : ''}</i></h3>
-                        <Button onClick={()  => this.newBoard()}>{this.state.rounds < 6 ? 'Next Round!' : 'Let\'s see that score!'}</Button>
+            <Container fluid className="gameboard">
+                <Row className="header">
+                    <Col className="text-left" lg={2}>
+                        <img src="./name_game_back_icon.png" />
+                    </Col>
+                    <Col className="header text-center" lg={{span: 4, offset: 2}}>
+                        <img src="./name_game_sub_logo.png" />
                     </Col>
                 </Row>
-                {this.state.rounds <= 6 ? 
-                <Row className="row row-cols-3">
-                    {this.state.options.map((option, index) => (
-                        <EmpCard key={option.id} data={option} answer={this.state.answer.id} getResult={this.getResult} className={this.state.cardClass} />
-                    ))}
-                </Row> : 
                 <Row>
-                    <Col>
-                        <h3>Nice job! Let's see how you did!</h3>
+                    <Col lg={{span: 7, offset: 3}}>
+                        <Row>
+                            <Col className="text-center mt-3 mb-3 lead">
+                                Which one of these good-looking photos is the real 
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col className="text-center mb-3">
+                                <b>{this.state.answer.firstName} {this.state.answer.lastName}</b>
+                            </Col>
+                        </Row>
+                        {this.state.rounds <= 6 ? 
+                        <Row className="row row-cols-4">
+                            {this.state.options.map((option, index) => (
+                                <EmpCard key={option.id} data={option} answer={this.state.answer.id} getResult={this.getResult} className={this.state.cardClass} />
+                            ))}
+                        </Row> : 
+                        <Row>
+                            <Col>
+                                <h3>Nice job! Let's see how you did!</h3>
+                            </Col>
+                        </Row>
+                        }
+                        <Row>
+                            <Col className="text-center">
+                                {/* <Button onClick={() => this.newBoard()}>Play Again</Button> */}
+                                <Button className="btn-lg btn-info w-25 rounded-5 mr-1" onClick={()  => this.newBoard()}>{this.state.rounds < 6 ? 'Next Round!' : 'Let\'s see that score!'}</Button> 
+                                <Link to="/"><Button className="btn-lg btn-info w-25 rounded-5 ml-1">Leave the Game</Button></Link>
+                            </Col>
+                        </Row>
                     </Col>
-                </Row>
-                }
-                <Row>
-                    {/* <Button onClick={() => this.newBoard()}>Play Again</Button> */}
-                    <Link to="/"><Button>Leave the Game</Button></Link>
                 </Row>
             </Container>
         );

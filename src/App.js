@@ -43,10 +43,7 @@ export default class App extends React.Component {
       return <div>Loading data...</div>
     } else {
       return (
-        <Container>
-          <Navbar bg="dark" variant="dark">
-            <Navbar.Brand href="#home">WillowTree Name Game</Navbar.Brand>
-          </Navbar>
+        <div id="App">
           <Router>
             <Switch>
               <Route exact path="/">
@@ -57,7 +54,7 @@ export default class App extends React.Component {
               </Route>
             </Switch>
           </Router>
-        </Container>
+        </div>
       )
     };
   };
