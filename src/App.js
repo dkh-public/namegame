@@ -23,7 +23,7 @@ export default class App extends React.Component {
             (result) => {
               this.setState({
                 dataLoaded: true,
-                data: result
+                data: result.filter(employee => employee.firstName.includes('J'))
               });
             },
             (error) => {
