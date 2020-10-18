@@ -2,14 +2,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## To run this application:
 
-Clone or check out this repo to your local device. Once saved, run "npm install", then "npm start".<br />
-This runs the game in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-### `npm start`
-
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Clone or check out this repo to your local device. Once saved, run "npm install", then "npm start".
+This runs the game in the development mode. 
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.<br />
 
 ## About the project
 
