@@ -9,6 +9,8 @@ export default class Gameboard extends React.Component {
         super(props);
         this.initState = {
             // Gameboard state
+            data: [],
+            dataLoaded: false, 
             options:[],
             answer:{},
             correct: 0,
@@ -25,20 +27,52 @@ export default class Gameboard extends React.Component {
             elapsedTime: 0
         };
         this.state = this.initState;
+        this.getData = this.getData.bind(this);
         this.newBoard = this.newBoard.bind(this);
+        this.filterData = this.filterData.bind(this);
     }
 
-    componentDidMount = () => {
-        let options = random(this.props.data,6);
+    componentDidMount() {
+        fetch('https://willowtreeapps.com/api/v1.0/profiles')
+            .then(response => response.json())
+            .then(
+              (result) => {
+                this.setState({
+                  dataLoaded: true,
+                  data: result
+                });
+                this.getData(this.state.data);
+              },
+              (error) => {
+                this.setState({
+                  dataLoaded: true,
+                  error
+              });
+            }
+        ) // End Fetch
+    }
+
+    getData = (data) => {
+        // Use the filterData function below to filter result set (e.g. omit records with no image file, etc.)
+        let options = random(this.filterData(data),6);
         let answer = random(options,1)[0];
         this.setState({
             options: options,
             answer: answer
         });
-    };
+    }
+  
+    filterData = (data) => {
+        // Simple filters to pare down JSON result set
+        let fData = data;
+            fData = fData.filter(item => item.headshot.width >= 200);
+            fData = fData.filter(item => !item.headshot.url == '');
+            fData = fData.filter(item => !item.headshot.url.includes('featured-image-TEST1.png'));
+        return fData;
+    }
 
     newBoard = () => {
-        let options = random(this.props.data,6);
+        let options = random(this.state.data,6);
         let answer = random(options,1)[0];
         this.setState({
             options: options,
@@ -142,10 +176,8 @@ export default class Gameboard extends React.Component {
                                         }
                                     }}><Button className="btn-lg btn-info w-25 rounded-5 mr-1" onClick={()  => this.newBoard()}>Show Me My Stats!</Button></Link>
                                 }
-
                             </Col>
                         </Row>
-
                     </Col>
                 </Row>
             </Container>
