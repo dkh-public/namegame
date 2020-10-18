@@ -11,7 +11,6 @@ export default class Stats extends React.Component {
     }
 
     render() {
-        console.log(this.props.location);
         return(
             <Container fluid className="stats">
 
