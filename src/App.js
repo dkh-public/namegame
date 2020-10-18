@@ -21,6 +21,7 @@ export default class App extends React.Component {
     <div id="App">
       <Router>
         <Switch>
+          {/* Set routes to pages using React Router */}
           <Route exact path="/" component={Home} />
           <Route exact path="/play" component={Gameboard} />
           <Route exact path="/stats" component={Stats} />

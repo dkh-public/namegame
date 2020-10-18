@@ -7,6 +7,7 @@ import EmpCard from './EmpCard';
 export default class Gameboard extends React.Component {
     constructor(props) {
         super(props);
+        // Save state as initState so we can easily reload the gameboard
         this.initState = {
             // Gameboard state
             data: [],
@@ -18,11 +19,11 @@ export default class Gameboard extends React.Component {
             rounds: 0,
             thisRound: '',
             isClicked: false,
-            // Display state
+            // Display states for EmpCards
             cardClass: 'card m-3 border-1 empCard',
             imgClass: 'card-img-top',
             answerClass: 'hide',
-            // Button state
+            // Continue button state
             nextRound: 'disabled',
             elapsedTime: 0
         };
@@ -33,6 +34,7 @@ export default class Gameboard extends React.Component {
     }
 
     componentDidMount() {
+        // Fetch the data from the WillowTree JSON API
         fetch('https://willowtreeapps.com/api/v1.0/profiles')
             .then(response => response.json())
             .then(
@@ -41,6 +43,7 @@ export default class Gameboard extends React.Component {
                   dataLoaded: true,
                   data: result
                 });
+                // Save the data in the Gameboard state
                 this.getData(this.state.data);
               },
               (error) => {
@@ -56,6 +59,7 @@ export default class Gameboard extends React.Component {
         // Use the filterData function below to filter result set (e.g. omit records with no image file, etc.)
         let options = random(this.filterData(data),6);
         let answer = random(options,1)[0];
+        // Set the options and answer in the Gameboard state
         this.setState({
             options: options,
             answer: answer
@@ -73,6 +77,7 @@ export default class Gameboard extends React.Component {
     }
 
     newBoard = () => {
+        // Render a new board once the round is over
         let options = random(this.state.data,6);
         let answer = random(options,1)[0];
         this.setState({
@@ -88,22 +93,23 @@ export default class Gameboard extends React.Component {
     };
 
     getResult = (result,isClicked) => {
+        // Passed to child component (EmpCard), this function returns the clicked employee's ID to compare to the Answer ID held in Gameboard state. Also gets "isClicked" from EmpCard so that all cards on the board can be obscured (prevents users from clicking more than one card per round)
         this.setState({
             nextRound: '',
             imgClass: this.state.imgClass + ' checked-blur',
             answerClass: 'd-flex align-items-end show',
             isClicked: isClicked,
-            rounds: this.state.rounds+1
+            rounds: this.state.rounds+1 // Count the number of rounds so we can get correct/incorrect %ages
         })
         if(result===this.state.answer.id) {
             this.setState({
                 thisRound: 'Correct!',
-                correct: this.state.correct+1,
+                correct: this.state.correct+1, // Adds to correct answer tally
             })
         } else {
             this.setState({
                 thisRound: 'Incorrect!',
-                incorrect: this.state.incorrect+1
+                incorrect: this.state.incorrect+1 // Adds to incorrect answer tally
             })
         };
     }
@@ -111,13 +117,13 @@ export default class Gameboard extends React.Component {
     render() {
         return (
             <Container fluid className="gameboard">
-                {/* Render header bar w/ logo and "back" icon */}
+                {/* Render header bar w/ logo and "back" icon STUB: The back icon image needs to be cleaned up. */}
                 <Row id="gameboardHeader" className="header">
                     <Col className="text-left" lg={2}>
-                        <Link to="/"><img src="./name_game_back_icon.png" alt="" /></Link>
+                        <Link to="/"><img src="./name_game_back_icon.png" alt="Click here to return to homepage" /></Link>
                     </Col>
                     <Col className="header text-center" lg={{span: 4, offset: 2}}>
-                        <img src="./name_game_sub_logo.png" alt="" />
+                        <img src="./name_game_sub_logo.png" alt="The Name Game" />
                     </Col>
                 </Row>
 
@@ -131,17 +137,18 @@ export default class Gameboard extends React.Component {
 
                         <Row>
                             <Col className="text-center mb-3 lead">
-                                <b>{this.state.answer.firstName} {this.state.answer.lastName}</b>
+                                <b className="answer-display">{this.state.answer.firstName} {this.state.answer.lastName}</b>
                             </Col>
                         </Row>
 
                         <Row id="cardDeck" className="row row-cols-4 justify-content-center">
-                            {/* Lay out the card deck */}
+                            {/* Lay out the card deck based on the six options chosen randomly by random-n */}
                             {this.state.options.map((option, index) => (
                                 <EmpCard key={option.id} 
-                                         data={option} 
-                                         getResult={this.getResult} 
-                                         answer={this.state.answer.id} 
+                                         data={option} // Option mapped by this.state.options.map
+                                         getResult={this.getResult} // Function to process the result when the user clicks an option
+                                         answer={this.state.answer.id} // Pass the answer ID to the EmpCard for comparison
+                                         // Passing card classes from parent component so it can control toggling classes on click
                                          cardClass={this.state.cardClass} 
                                          imgClass={this.state.imgClass} 
                                          answerClass={this.state.answerClass} 
@@ -152,10 +159,12 @@ export default class Gameboard extends React.Component {
 
                         <Row id="rules">
                             {this.state.correct < 5 ?
+                            // We're playing to five. So as long as the # of correct answers is less than five, show the "Rules"
                             <Col className="text-center mb-3 lead">
                                 Let's play to five. So far you've guessed <b>{this.state.correct}</b> right and <b>{this.state.incorrect}</b> wrong through <b>{this.state.rounds}</b> {this.state.rounds===1 ? 'round' : 'rounds'}.
                             </Col>
                             :
+                            // Once you hit five correct answers, the game ends and you can check your stats.
                             <Col className="text-center mb-3 lead">
                                 <h3>Nice job! Let's see how you did!</h3>
                             </Col>
@@ -166,8 +175,11 @@ export default class Gameboard extends React.Component {
                             <Col className="text-center">
                                 {/* <Button onClick={() => this.newBoard()}>Play Again</Button> */}
                                 {this.state.correct < 5 ? 
+                                    // Show the next round button until the user hits five correct answers
                                     <Button disabled={this.state.nextRound} className="btn-lg btn-info w-25 rounded-5 mr-1" onClick={()  => this.newBoard()}>Next Round</Button>
                                 :
+                                    // React Router link to stats component once user has answered five correct guesses
+                                    // Pass the # correct, # incorrect and # of rounds to the stats page for calculating
                                     <Link to={{
                                         pathname: '/stats',
                                         state: {

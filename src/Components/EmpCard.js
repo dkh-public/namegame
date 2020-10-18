@@ -21,17 +21,18 @@ export default class EmpCard extends React.Component {
         this.props.getResult(this.props.data.id,true);
         if(this.props.answer===this.props.data.id) {
             this.setState({
-                cardClass: 'card m-3 border-1 empCard right-card'
+                cardClass: 'card m-3 border-1 empCard right-card' // Makes card background green if correct
             })
         } else {
             this.setState({
-                cardClass: 'card m-3 border-1 empCard wrong-card'
+                cardClass: 'card m-3 border-1 empCard wrong-card' // Makes card background red if incorrect
             })
         };
     };
 
     render() {
         return (
+            /* Using React Bootstrap to make displaying cards easier */
             <Card className={this.state.cardClass} onClick={() => this.handleClick()}>
                 <Card.Img className={this.props.imgClass} variant="top" src={this.props.data.headshot.url} />
                 <Card.ImgOverlay className={this.props.answerClass}>

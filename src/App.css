@@ -29,6 +29,10 @@
   background-color: #FFFFFF;
 }
 
+.answer-display {
+  font-size: 2rem;
+}
+
 .hide {
   display: none;
 }
