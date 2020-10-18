@@ -117,7 +117,6 @@ export default class Gameboard extends React.Component {
     render() {
         return (
             <Container fluid className="gameboard">
-                {/* Render header bar w/ logo and "back" icon STUB: The back icon image needs to be cleaned up. */}
                 <Row id="gameboardHeader" className="header">
                     <Col className="text-left" lg={2}>
                         <Link to="/"><img src="./name_game_back_icon.png" alt="Click here to return to homepage" /></Link>
