@@ -17,7 +17,7 @@ export default class Gameboard extends React.Component {
             thisRound: '',
             isClicked: false,
             // Display state
-            cardClass: 'card m-4 border-1 empCard',
+            cardClass: 'card m-3 border-1 empCard',
             imgClass: 'card-img-top',
             answerClass: 'hide',
             // Button state
