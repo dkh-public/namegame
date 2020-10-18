@@ -1,13 +1,13 @@
 import React from 'react';
 import {Container,Row,Col,Button} from 'react-bootstrap';
-import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 function Home(props) {
     return (
         <Container fluid className='home'>
             <Row>
                 <Col xs={12} md={12} className="text-center mb-5">
-                    <img src="name_game_logo.png" />
+                    <img src="name_game_logo.png" alt="" />
                 </Col>
             </Row>
             <Row>

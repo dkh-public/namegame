@@ -1,6 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
-import {Container, Row, Col, Button, Navbar} from 'react-bootstrap';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Home from './Components/Home';
 import Gameboard from './Components/Gameboard';
 import Stats from './Components/Stats';
@@ -43,7 +42,7 @@ export default class App extends React.Component {
   }
 
   render() {
-    const {error, dataLoaded, data} = this.state;
+    const {error, dataLoaded} = this.state;
     if(error) {
       return <div>There was an error fetching data.</div>
     } else if (!dataLoaded) {
@@ -53,15 +52,11 @@ export default class App extends React.Component {
         <div id="App">
           <Router>
             <Switch>
-              <Route exact path="/">
-                <Home />
-              </Route>
+              <Route exact path="/" component={Home} />
               <Route exact path="/play">
                 <Gameboard data={this.filterData(this.state.data)} />
               </Route>
-              <Route exact path="/stats">
-                <Stats />
-              </Route>
+              <Route exact path="/stats" component={Stats} />
             </Switch>
           </Router>
         </div>

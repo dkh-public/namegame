@@ -39,22 +39,38 @@
 
 /* Cards */
 
-.hide-name {
-  display: none;
-}
-
-.show-name {
-  display: block;
-}
-
 .wrong-card {
-  border: 1px solid red;
+  background-color: red;
 }
 
 .right-card {
-  border: 1px solid green;
+  background-color: green;
 }
 
-.checked-card {
+.checked-blur {
   opacity: .5;
+}
+
+.card-img-overlay {
+  text-align: center;
+  font-weight: bold;
+}
+
+.answer-overlay-text {
+  background-color: white;
+  padding: 2px 4px;
+  width: auto;
+  height: auto;
+}
+
+/* Stats */
+
+.stats-body {
+  width: 100%;
+  background-color: #223547; 
+}
+
+.stats-light-bold {
+  color: white;
+  font-weight: bold;
 }
