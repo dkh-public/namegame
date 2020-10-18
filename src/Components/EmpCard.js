@@ -5,10 +5,15 @@ export default class EmpCard extends React.Component {
     constructor(props) {
         super(props);
         this.state={
+            hasLoaded: false,
             cardClass: this.props.cardClass
         }
         this.handleClick = this.handleClick.bind(this);
     };
+
+    componentDidMount = () => {
+        this.setState({hasLoaded: true})
+    }
 
     handleClick = () => {
         if(this.props.isClicked) { return false }; // Don't update anything if a card has already been clicked this round
