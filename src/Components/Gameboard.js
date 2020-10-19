@@ -186,7 +186,7 @@ export default class Gameboard extends React.Component {
                                             incorrect: this.state.incorrect,
                                             rounds: this.state.rounds
                                         }
-                                    }}><Button className="btn-lg btn-info w-25 rounded-5 mr-1" onClick={()  => this.newBoard()}>Show Me My Stats!</Button></Link>
+                                    }}><Button className="btn-lg btn-info w-50 rounded-5 mr-1" onClick={()  => this.newBoard()}>Show Me My Stats!</Button></Link>
                                 }
                             </Col>
                         </Row>
