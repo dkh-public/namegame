@@ -42,7 +42,7 @@ export default class Gameboard extends React.Component {
               (result) => {
                 this.setState({
                   dataLoaded: true,
-                  data: result
+                  data: this.filterData(result)
                 });
                 // Save the data in the Gameboard state
                 this.getData(this.state.data);
@@ -58,7 +58,7 @@ export default class Gameboard extends React.Component {
 
     getData = (data) => {
         // Use the filterData function below to filter result set (e.g. omit records with no image file, etc.)
-        let options = random(this.filterData(data),6);
+        let options = random(data,6);
         let answer = random(options,1)[0];
         // Set the options and answer in the Gameboard state
         this.setState({
@@ -71,10 +71,12 @@ export default class Gameboard extends React.Component {
         // Simple filters to pare down JSON result set
         // STUB: Unexpected results - needs refinement
         let fData = data;
-            // fData = fData.filter(item => item.headshot.width >= 2000);
-            // fData = fData.filter(item => !item.headshot.url == '');
-            // fData = fData.filter(item => !item.headshot.url.includes('featured-image-TEST1.png'));
-            // fData = fData.filter(item => item.headshot.hasOwnProperty('url'));
+            // fData = fData.filter(item => item.firstName.includes('F')); // TEST
+            // fData = fData.filter(item => item.headshot.width >= 300);
+            fData = fData.filter(item => !item.headshot.url == '');
+            fData = fData.filter(item => !item.headshot.url.includes('featured-image-TEST1.png'));
+            fData = fData.filter(item => !item.headshot.url.includes('Logo'));
+            fData = fData.filter(item => item.headshot.hasOwnProperty('url'));
         return fData;
     }
 

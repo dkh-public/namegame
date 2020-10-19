@@ -21,13 +21,7 @@ Some of the NPM packages I used in the functionality of the game are:<br />
 
 ## For futher development
 
-There are some features I'd hoped to implement, but was unable to due to time constraints. <br />
-
-* **Timer:** I tried using several NPM timer packages as well as a simple setInterval function to run a round timer. But I wasn't able to get it to function like I wanted. I may continue to work on this post-submission.<br />
-
-* **Option tracking:** The randomizer I use doesn't keep track of which employees have been selected as the options or answer, so there is a fair amount of repetition. With more time I would explore maintaining an array of previously loaded employees to omit from further rounds. 
-
-* **Image filter:** Some records in the dataset do not include images. Others have generic images, oddly-sized images, etc. I'd hoped to find a package that could do things like face recognition (filtering out images that didn't have a face in them) and dimension normalization (to make the image dimensions consistent). These both seemed rather complex and were not something I feel I have the time or prowess to tackle right now.
+There are some features I'd hoped to implement, like more complex image filtering, face recognition, dynamic image resizing, and a round timer.  I brainstormed a few ways to implement these using NPM packages I was researching, but I ran out of time to further develop these ideas. <br />
 
 ## Conclusion
 
