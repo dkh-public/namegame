@@ -10,7 +10,7 @@ export default class Header extends React.Component {
                     <Link to="/"><img src="./name_game_back_icon.png" alt="Click here to return to homepage" /></Link>
                 </Col>
                 <Col className="header text-center" sm={{span: 8, offset: 1}}>
-                    <img src="./name_game_sub_logo.png" alt="The Name Game" />
+                    <Link to="/"><img src="./name_game_sub_logo.png" alt="The Name Game" /></Link>
                 </Col>
             </Row>
         )
