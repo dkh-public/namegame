@@ -68,6 +68,7 @@ export default class Gameboard extends React.Component {
   
     filterData = (data) => {
         // Simple filters to pare down JSON result set
+        // STUB: Unexpected results - needs refinement
         let fData = data;
             // fData = fData.filter(item => item.headshot.width >= 2000);
             // fData = fData.filter(item => !item.headshot.url == '');
