@@ -1,6 +1,7 @@
 import React from 'react';
 import {Container, Row, Col, Button} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
+import Header from './Header';
 
 export default class Stats extends React.Component {
     constructor(props) {
@@ -14,16 +15,7 @@ export default class Stats extends React.Component {
     render() {
         return(
             <Container fluid className="stats">
-
-                {/* Render header bar w/ logo and "back" icon STUB: The back icon image needs to be cleaned up. */}
-                <Row id="gameboardHeader" className="header">
-                    <Col className="text-left" lg={2}>
-                        <Link to="/"><img src="./name_game_back_icon.png" alt="Click here to return to homepage" /></Link>
-                    </Col>
-                    <Col className="header text-center" lg={{span: 4, offset: 2}}>
-                        <img src="./name_game_sub_logo.png" alt="The Name Game" />
-                    </Col>
-                </Row>
+                <Header />
 
                 <Row className="stats-body">
                     <Col md="12" className="text-center">
@@ -78,6 +70,11 @@ export default class Stats extends React.Component {
                                 Let's Play Again!
                             </Button>
                         </Link>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col xs={12} md={12} className="text-center mt-2">
+                        <Link to="/"><span className="text-info">&lt; Home</span></Link>
                     </Col>
                 </Row>
             </Container>

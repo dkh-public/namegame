@@ -3,6 +3,7 @@ import {Container, Row, Col, Button} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import random from 'random-n';
 import EmpCard from './EmpCard';
+import Header from './Header';
 
 export default class Gameboard extends React.Component {
     constructor(props) {
@@ -124,14 +125,7 @@ export default class Gameboard extends React.Component {
     render() {
         return (
             <Container fluid className="gameboard">
-                <Row id="gameboardHeader" className="header">
-                    <Col className="text-left" lg={2}>
-                        <Link to="/"><img src="./name_game_back_icon.png" alt="Click here to return to homepage" /></Link>
-                    </Col>
-                    <Col className="header text-center" lg={{span: 4, offset: 2}}>
-                        <img src="./name_game_sub_logo.png" alt="The Name Game" />
-                    </Col>
-                </Row>
+                <Header />
 
                 <Row id="gameboardPlayArea">
                     <Col lg={{span: 6, offset: 3}}>
