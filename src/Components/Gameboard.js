@@ -69,10 +69,10 @@ export default class Gameboard extends React.Component {
     filterData = (data) => {
         // Simple filters to pare down JSON result set
         let fData = data;
-            fData = fData.filter(item => item.headshot.width >= 200);
-            fData = fData.filter(item => !item.headshot.url == '');
-            fData = fData.filter(item => !item.headshot.url.includes('featured-image-TEST1.png'));
-            fData = fData.filter(item => item.headshot.hasOwnProperty('url'));
+            // fData = fData.filter(item => item.headshot.width >= 2000);
+            // fData = fData.filter(item => !item.headshot.url == '');
+            // fData = fData.filter(item => !item.headshot.url.includes('featured-image-TEST1.png'));
+            // fData = fData.filter(item => item.headshot.hasOwnProperty('url'));
         return fData;
     }
 
