@@ -27,8 +27,7 @@ There are some features I'd hoped to implement, but was unable to due to time co
 
 * **Option tracking:** The randomizer I use doesn't keep track of which employees have been selected as the options or answer, so there is a fair amount of repetition. With more time I would explore maintaining an array of previously loaded employees to omit from further rounds. 
 
-* **Image filter:** Some records in the dataset do not include images. Others have generic images, oddly-sized images, etc. I'd hoped to find a package that could do things like face recognition (filtering out images that didn't have a face in them) and  
-dimension normalization (to make the image dimensions consistent). These both seemed rather complex and were not something I feel I have the time or prowess to tackle right now.
+* **Image filter:** Some records in the dataset do not include images. Others have generic images, oddly-sized images, etc. I'd hoped to find a package that could do things like face recognition (filtering out images that didn't have a face in them) and dimension normalization (to make the image dimensions consistent). These both seemed rather complex and were not something I feel I have the time or prowess to tackle right now.
 
 ## Conclusion
 
