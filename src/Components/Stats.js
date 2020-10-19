@@ -1,5 +1,5 @@
 import React from 'react';
-import {Container, Row, Col} from 'react-bootstrap';
+import {Container, Row, Col, Button} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 
 export default class Stats extends React.Component {
@@ -34,7 +34,16 @@ export default class Stats extends React.Component {
                 </Row>
 
                 <Row className="mt-3">
-                    <Col md={{span: 3, offset: 3}} className="text-center">
+                    <Col md={{span: 2, offset: 3}} className="text-center">
+                        <div className="display-4">
+                            {/* Convert the correct answers divided by rounds to %age */}
+                            {this.props.location.state.rounds}
+                        </div>
+                        <div className="text-center lead">
+                            Rounds Played
+                        </div>
+                    </Col>
+                    <Col md={2} className="text-center">
                         <div className="display-4">
                             {/* Convert the correct answers divided by rounds to %age */}
                             {Math.floor(this.props.location.state.correct/this.props.location.state.rounds*100)}%
@@ -43,7 +52,7 @@ export default class Stats extends React.Component {
                             Correct Selections
                         </div>
                     </Col>
-                    <Col md="3" className="text-center">
+                    <Col md={2} className="text-center">
                         <div className="display-4">
                         {/* Convert the incorrect answers divided by rounds to %age */}
                         {Math.floor(this.props.location.state.incorrect/this.props.location.state.rounds*100)}%
@@ -61,6 +70,15 @@ export default class Stats extends React.Component {
                             Avg Selection Time
                         </div>
                     </Col> */}
+                </Row>
+                <Row>
+                    <Col xs={12} md={12} className="text-center mt-5">
+                        <Link to="/play">
+                            <Button className="btn-lg btn-info w-25 rounded-5">
+                                Let's Play Again!
+                            </Button>
+                        </Link>
+                    </Col>
                 </Row>
             </Container>
         )
