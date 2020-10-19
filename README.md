@@ -3,22 +3,17 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## To run this application:
 
 Clone or check out this repo to your local device. Once saved, run "npm install", then "npm start".
-This runs the game in the development mode. 
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.<br />
+This runs the game in the development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.<br />
 
 ## About the project
 
-This game was developed using React.js from specs provided by WillowTree. The purpose of this project is to highlight my coding skills and abilities. React.js is not my primary coding language. 
-ColdFusion, JavaScript and jQuery are the main languages I use in my current position at the UVA Health System. However, I 
-felt it would be better to tackle this project in a language more relevant to the position at WillowTree rather than the languages I'm more comfortable in. I have been learning as I've been going with this
-project and am extremely happy with the results so far.
+This game was developed using React.js from specs provided by WillowTree. The purpose of this project is to highlight my coding skills and abilities. My development background is primarily in ColdFusion, Javascript and jQuery, but I felt React would be a better library to use for this particular application. While I am fairly new to using React, I am pleased with the results. 
 
 ## Application highlights
 
 Some of the NPM packages I used in the functionality of the game are:<br />
 
-* **random-n:** This selects random items from an array. I used this to get the six options from the JSON API, then again to get a single "answer option form the subset. I felt this was more efficient than getting the
-answer first, then trying to get five other options without also selecting the already-chosen answer among the options subset.<br />
+* **random-n:** This selects random items from an array. I used this to get the six options from the JSON API, then again to get a single "answer" option form the subset. I felt this was more efficient than getting the answer first, then trying to get five other options without also selecting the already-chosen answer among the options subset.<br />
 
 * **React Router:** This package allowed me to use URLs to navigate to various components rather than having everything running under the root, which made testing difficult. <br />
 
@@ -30,8 +25,7 @@ There are some features I'd hoped to implement, but was unable to due to time co
 
 * **Timer:** I tried using several NPM timer packages as well as a simple setInterval function to run a round timer. But I wasn't able to get it to function like I wanted. I may continue to work on this post-submission.<br />
 
-* **Option tracking:** The randomizer I use doesn't keep track of which employees have been selected as the options or answer, so there is a fair amount of repetition. With more time I would explore maintaining an array of 
-previously loaded employees to omit from further rounds. 
+* **Option tracking:** The randomizer I use doesn't keep track of which employees have been selected as the options or answer, so there is a fair amount of repetition. With more time I would explore maintaining an array of previously loaded employees to omit from further rounds. 
 
 * **Image filter:** Some records in the dataset do not include images. Others have generic images, oddly-sized images, etc. I'd hoped to find a package that could do things like face recognition (filtering out images that didn't have a face in them) and  
 dimension normalization (to make the image dimensions consistent). These both seemed rather complex and were not something I feel I have the time or prowess to tackle right now.
