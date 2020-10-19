@@ -17,7 +17,8 @@ export default class Gameboard extends React.Component {
             correct: 0,
             incorrect: 0,
             rounds: 0,
-            thisRound: '',
+            thisRound: 'Let\'s play to five.',
+            alertClass: '',
             isClicked: false,
             // Display states for EmpCards
             cardClass: 'card m-3 border-1 empCard',
@@ -85,6 +86,7 @@ export default class Gameboard extends React.Component {
             options: options,
             answer: answer,
             thisRound: '',
+            alertClass: '', 
             nextRound: 'disabled',
             cardClass: this.initState.cardClass,
             answerClass: this.initState.answerClass,
@@ -97,7 +99,7 @@ export default class Gameboard extends React.Component {
         // Passed to child component (EmpCard), this function returns the clicked employee's ID to compare to the Answer ID held in Gameboard state. Also gets "isClicked" from EmpCard so that all cards on the board can be obscured (prevents users from clicking more than one card per round)
         this.setState({
             nextRound: '',
-            imgClass: this.state.imgClass + ' checked-blur',
+            imgClass: 'card-img-top checked-blur',
             answerClass: 'd-flex align-items-end show',
             isClicked: isClicked,
             rounds: this.state.rounds+1 // Count the number of rounds so we can get correct/incorrect %ages
@@ -105,11 +107,13 @@ export default class Gameboard extends React.Component {
         if(result===this.state.answer.id) {
             this.setState({
                 thisRound: 'Correct!',
+                alertClass: 'alert alert-success',
                 correct: this.state.correct+1, // Adds to correct answer tally
             })
         } else {
             this.setState({
                 thisRound: 'Incorrect!',
+                alertClass: 'alert alert-danger',
                 incorrect: this.state.incorrect+1 // Adds to incorrect answer tally
             })
         };
@@ -157,11 +161,13 @@ export default class Gameboard extends React.Component {
                             ))}
                         </Row>
 
-                        <Row id="rules">
+                        <Row id="rules" className="m-2">
                             {this.state.correct < 5 ?
                             // We're playing to five. So as long as the # of correct answers is less than five, show the "Rules"
                             <Col className="text-center mb-3 lead">
-                                Let's play to five. So far you've guessed <b>{this.state.correct}</b> right and <b>{this.state.incorrect}</b> wrong through <b>{this.state.rounds}</b> {this.state.rounds===1 ? 'round' : 'rounds'}.
+                                <span className={this.state.alertClass}>
+                                    <b>{this.state.thisRound}</b> So far you've guessed <b>{this.state.correct}</b> right and <b>{this.state.incorrect}</b> wrong through <b>{this.state.rounds}</b> {this.state.rounds===1 ? 'round' : 'rounds'}.
+                                </span>
                             </Col>
                             :
                             // Once you hit five correct answers, the game ends and you can check your stats.
